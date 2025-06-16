@@ -7,7 +7,7 @@ export default function SignInSidebar({ isOpen, onToggle }: { isOpen: boolean, o
     }
 
     return (
-        <div className="fixed right-0 top-0 bottom-0 w-1/4 bg-neutral-200 transition-all duration-300 ease-in-out transform"
+        <div className="flex-row fixed right-0 top-0 bottom-0 w-1/4 bg-neutral-200 transition-all duration-300 ease-in-out transform"
              style={{ translate: isOpen ? '0' : '100%', opacity: isOpen ? 1 : 0 }}>
             <div className="flex flex-col text-white">
                 <div className="text-2xl font-bold mb-4 w-full bg-neutral-700 p-2 px-8 h-16 flex flex-row justify-between items-center">
@@ -25,7 +25,7 @@ export default function SignInSidebar({ isOpen, onToggle }: { isOpen: boolean, o
                         <Label className="w-full" >Password:</Label>
                         <Input type="password" className="bg-neutral-100 w-full focus:outline-none h-10 px-2 drop-shadow-sm"/>
                     </Field>
-                    <div className="flex flex-col justify-between items-center">
+                    <div className="flex flex-col justify-between items-center gap-2">
                         <Button className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer">Sign In</Button>
                         <span className="text-sm underline hover:cursor-pointer text-neutral-900 hover:text-neutral-700">Sign up</span>
                     </div>
