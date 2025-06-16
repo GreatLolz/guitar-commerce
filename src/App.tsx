@@ -1,14 +1,25 @@
 import Header from "./components/Header";
+import SignInSidebar from "./components/SignInSidebar";
+import { useState } from 'react';
 
 function App() {
+    const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  return (
-    <>
-      <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
-        <Header />
-      </div>
-    </>
-  )
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen)
+    }
+
+    return (
+        <>
+            <SignInSidebar 
+                isOpen={sidebarOpen} 
+                onToggle={toggleSidebar}
+            />
+            <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
+                <Header onSignInClick={toggleSidebar} />
+            </div>
+        </>
+    )
 }
 
 export default App
