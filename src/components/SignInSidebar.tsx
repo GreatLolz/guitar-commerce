@@ -2,7 +2,7 @@ import { Button, Field, Input, Label } from '@headlessui/react'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 
-export default function SignInSidebar({ isOpen, onToggle, onSignIn }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void }) {
+export default function SignInSidebar({ isOpen, onToggle, onSignIn, onSignUp }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void, onSignUp: () => void }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     
@@ -11,12 +11,17 @@ export default function SignInSidebar({ isOpen, onToggle, onSignIn }: { isOpen: 
     }
 
     const signIn = (username: string, password: string) => {
-        onSignIn(username, password)
         toggleSidebar()
+        onSignIn(username, password)
+    }
+
+    const signUp = () => {
+        toggleSidebar()
+        onSignUp()
     }
 
     return (
-        <div className="flex-row fixed right-0 top-0 bottom-0 w-1/4 bg-neutral-200 transition-all duration-300 ease-in-out transform"
+        <div className="flex-row fixed right-0 top-0 bottom-0 max-w-md w-full bg-neutral-200 transition-all duration-300 ease-in-out transform"
              style={{ translate: isOpen ? '0' : '100%', opacity: isOpen ? 1 : 0 }}>
             <div className="flex flex-col text-white">
                 <div className="text-2xl font-bold mb-4 w-full bg-neutral-700 p-2 px-8 h-16 flex flex-row justify-between items-center">
@@ -36,7 +41,7 @@ export default function SignInSidebar({ isOpen, onToggle, onSignIn }: { isOpen: 
                     </Field>
                     <div className="flex flex-col justify-between items-center gap-2">
                         <Button className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer" onClick={() => signIn(username, password)}>Sign In</Button>
-                        <span className="text-sm underline hover:cursor-pointer text-neutral-900 hover:text-neutral-700">Sign up</span>
+                        <span className="text-sm underline hover:cursor-pointer text-neutral-900 hover:text-neutral-700" onClick={signUp}>Sign up</span>
                     </div>
                 </div>
             </div>
