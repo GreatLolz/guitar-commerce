@@ -1,9 +1,18 @@
 import { Button, Field, Input, Label } from '@headlessui/react'
 import { X } from 'lucide-react'
+import { useState } from 'react'
 
-export default function SignInSidebar({ isOpen, onToggle }: { isOpen: boolean, onToggle: () => void }) {
+export default function SignInSidebar({ isOpen, onToggle, onSignIn }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void }) {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    
     const toggleSidebar = () => {
         onToggle()
+    }
+
+    const signIn = (username: string, password: string) => {
+        onSignIn(username, password)
+        toggleSidebar()
     }
 
     return (
@@ -19,14 +28,14 @@ export default function SignInSidebar({ isOpen, onToggle }: { isOpen: boolean, o
                 <div className="text-neutral-800 flex flex-col items-center p-8 px-16 gap-4">
                     <Field className="flex flex-col w-full items-center">
                         <Label className="w-full" >Username:</Label>
-                        <Input className="bg-neutral-100 w-full focus:outline-none h-10 px-2 drop-shadow-sm"/>
+                        <Input className="bg-neutral-100 w-full focus:outline-none h-10 px-2 drop-shadow-sm" onChange={(e) => setUsername(e.target.value)}/>
                     </Field>
                     <Field className="flex flex-col w-full items-center">
                         <Label className="w-full" >Password:</Label>
-                        <Input type="password" className="bg-neutral-100 w-full focus:outline-none h-10 px-2 drop-shadow-sm"/>
+                        <Input type="password" className="bg-neutral-100 w-full focus:outline-none h-10 px-2 drop-shadow-sm" onChange={(e) => setPassword(e.target.value)}/>
                     </Field>
                     <div className="flex flex-col justify-between items-center gap-2">
-                        <Button className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer">Sign In</Button>
+                        <Button className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer" onClick={() => signIn(username, password)}>Sign In</Button>
                         <span className="text-sm underline hover:cursor-pointer text-neutral-900 hover:text-neutral-700">Sign up</span>
                     </div>
                 </div>
