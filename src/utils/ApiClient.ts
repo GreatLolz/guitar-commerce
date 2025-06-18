@@ -8,6 +8,10 @@ class ApiClient {
         this.baseUrl = `${import.meta.env.VITE_API_URL}/api/v1`;
     }
 
+    private getToken(): string {
+        return localStorage.getItem('token') || '';
+    }
+
     public static getInstance(): ApiClient {
         if (!ApiClient.instance) {
             ApiClient.instance = new ApiClient();
@@ -21,6 +25,7 @@ class ApiClient {
                 username,
                 password
             });
+            localStorage.setItem('token', response.data.token);
             return response;
         } catch (error) {
             console.error('Sign in error:', error);
@@ -37,6 +42,20 @@ class ApiClient {
             return response;
         } catch (error) {
             console.error('Sign up error:', error);
+            throw error;
+        }
+    }
+
+    public async getUserData(): Promise<AxiosResponse> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/user/me`, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            });
+            return response;
+        } catch (error) {
+            console.error('Error fetching user data:', error);
             throw error;
         }
     }
