@@ -4,7 +4,6 @@ import { useState } from 'react';
 import SignUpPopup from "./components/SignUpPopup";
 import ApiClient from "./utils/ApiClient";
 import axios from "axios";
-import { Button } from "@headlessui/react";
 
 function App() {
     const apiClient = ApiClient.getInstance()
@@ -49,7 +48,10 @@ function App() {
     const signUp = async (username: string, password: string) => {
         try {
             const response = await apiClient.signUp(username, password)
-            console.log(response.data)
+            if (response.status === 200) {
+                await signIn(username, password)
+            }
+            setSignUpOpen(false)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 alert(error.response?.data)
