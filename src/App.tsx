@@ -1,15 +1,22 @@
 import Header from "./components/Header";
 import SignInSidebar from "./components/SignInSidebar";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SignUpPopup from "./components/SignUpPopup";
 import ApiClient from "./utils/ApiClient";
 import axios from "axios";
+import type { UserData } from "./types/UserData";
 
 function App() {
     const apiClient = ApiClient.getInstance()
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [signUpOpen, setSignUpOpen] = useState(false)
+
+    const [userData, setUserData] = useState<UserData | null>(null)
+
+    useEffect(() => {
+        getUserData()   
+    }, [])
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
@@ -22,7 +29,8 @@ function App() {
     const getUserData = async () => {
         try {
             const response = await apiClient.getUserData()
-            console.log(response.data)
+            const user: UserData = { id: response.data.userId, name: response.data.username }
+            setUserData(user)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 alert(error.response?.data)
@@ -73,7 +81,7 @@ function App() {
                 onSignUp={signUp}
             />
             <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
-                <Header onSignInClick={toggleSidebar} />
+                <Header onSignInClick={toggleSidebar} userData={userData} />
             </div>
         </>
     )
