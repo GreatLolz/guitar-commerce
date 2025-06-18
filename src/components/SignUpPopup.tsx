@@ -29,6 +29,7 @@ export default function SignUpPopup({ isOpen, setSignUpOpen, onSignUp }: { isOpe
         }
 
         onSignUp(username, password)
+        setSignUpOpen(false)
     }
     
     return (

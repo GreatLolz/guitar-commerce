@@ -1,10 +1,13 @@
-import axios from "axios";
 import Header from "./components/Header";
 import SignInSidebar from "./components/SignInSidebar";
 import { useState } from 'react';
 import SignUpPopup from "./components/SignUpPopup";
+import ApiClient from "./utils/ApiClient";
+import axios from "axios";
 
 function App() {
+    const apiClient = ApiClient.getInstance()
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [signUpOpen, setSignUpOpen] = useState(false)
 
@@ -12,28 +15,30 @@ function App() {
         setSidebarOpen(!sidebarOpen)
     }
 
-    const toggleSignUpPopup = () => {
+    const toggleSignUp = () => {
         setSignUpOpen(!signUpOpen)
     }
 
-    const signIn = (username: string, password: string) => {
-        axios.post('/api/v1/user/login', { username, password })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    const signIn = async (username: string, password: string) => {
+        try {
+            const response = await apiClient.signIn(username, password)
+            console.log(response.data)
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data)
+            }
+        }
     }
 
-    const signUp = (username: string, password: string) => {
-        axios.post('/api/v1/user/register', { username, password })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    const signUp = async (username: string, password: string) => {
+        try {
+            const response = await apiClient.signUp(username, password)
+            console.log(response.data)
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                alert(error.response?.data)
+            }
+        }
     }
 
     return (
@@ -42,11 +47,11 @@ function App() {
                 isOpen={sidebarOpen} 
                 onToggle={toggleSidebar}
                 onSignIn={signIn}
-                onSignUp={toggleSignUpPopup}
+                onToggleSignUp={toggleSignUp}
             />
             <SignUpPopup 
                 isOpen={signUpOpen} 
-                setSignUpOpen={toggleSignUpPopup}
+                setSignUpOpen={toggleSignUp}
                 onSignUp={signUp}
             />
             <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">

@@ -2,7 +2,7 @@ import { Button, Field, Input, Label } from '@headlessui/react'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 
-export default function SignInSidebar({ isOpen, onToggle, onSignIn, onSignUp }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void, onSignUp: () => void }) {
+export default function SignInSidebar({ isOpen, onToggle, onSignIn, onToggleSignUp: onSignUp }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void, onToggleSignUp: () => void }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     
