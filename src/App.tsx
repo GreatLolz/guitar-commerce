@@ -5,6 +5,7 @@ import SignUpPopup from "./components/SignUpPopup";
 import ApiClient from "./utils/ApiClient";
 import axios from "axios";
 import type { UserData } from "./types/UserData";
+import Products from "./pages/Products";
 
 function App() {
     const apiClient = ApiClient.getInstance()
@@ -82,6 +83,7 @@ function App() {
             />
             <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
                 <Header onSignInClick={toggleSidebar} userData={userData} />
+                <Products />
             </div>
         </>
     )
