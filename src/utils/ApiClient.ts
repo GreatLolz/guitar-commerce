@@ -1,4 +1,5 @@
 import axios, { type AxiosResponse } from 'axios';
+import type { Product } from '../types/product';
 
 class ApiClient {
     private static instance: ApiClient;
@@ -56,6 +57,20 @@ class ApiClient {
             return response;
         } catch (error) {
             console.error('Error fetching user data:', error);
+            throw error;
+        }
+    }
+
+    public async getProductList(): Promise<Product[]> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/products`, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            });
+            return response.data.products;
+        } catch (error) {
+            console.error('Error fetching product list:', error);
             throw error;
         }
     }
