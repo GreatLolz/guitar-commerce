@@ -1,4 +1,4 @@
-import Product from "../components/products/Product";
+import ProductTile from "../components/products/ProductTile";
 
 const products = [
     {
@@ -35,7 +35,7 @@ export default function Products() {
     return (
         <div className="grid grid-cols-4 gap-2 mx-auto py-10">
             {products.map((product, index) => (
-                <Product key={index} imageUrl={product.imageUrl} name={product.name} price={product.price} rating={product.rating} reviewCount={product.reviewCount}/>
+                <ProductTile key={index} imageUrl={product.imageUrl} name={product.name} price={product.price} rating={product.rating} reviewCount={product.reviewCount}/>
             ))}
         </div>
     )

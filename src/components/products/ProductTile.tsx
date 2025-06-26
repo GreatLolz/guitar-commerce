@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-export default function Product({ imageUrl, name, price, rating, reviewCount }: { imageUrl: string, name: string, price: number, rating: number, reviewCount: number }) {
+export default function ProductTile({ imageUrl, name, price, rating, reviewCount }: { imageUrl: string, name: string, price: number, rating: number, reviewCount: number }) {
     return (
         <div className="bg-neutral-50 p-10 flex flex-col items-center hover:shadow-md hover:cursor-pointer gap-2 w-70 h-100">
             <img src={imageUrl} alt={name} className="w-50 aspect-square" />
