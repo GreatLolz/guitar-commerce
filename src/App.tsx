@@ -30,11 +30,19 @@ function App() {
     const getUserData = async () => {
         try {
             const response = await apiClient.getUserData()
+
+            if (!response) {
+                return
+            }
+
             const user: UserData = { id: response.data.userId, name: response.data.username }
             setUserData(user)
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                alert(error.response?.data)
+                if (error.response?.status === 401) {
+                    alert('Session invalid! Please sign in.')
+                    return
+                }
             }
         }
     }

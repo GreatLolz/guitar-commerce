@@ -47,8 +47,12 @@ class ApiClient {
         }
     }
 
-    public async getUserData(): Promise<AxiosResponse> {
+    public async getUserData(): Promise<AxiosResponse | null> {
         try {
+            if (!this.getToken()) {
+                return null
+            }
+
             const response = await axios.get(`${this.baseUrl}/user/me`, {
                 headers: {
                     Authorization: `Bearer ${this.getToken()}`
