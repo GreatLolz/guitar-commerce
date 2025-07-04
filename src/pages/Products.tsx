@@ -21,11 +21,11 @@ export default function Products() {
 
     useEffect(() => {
         getProductList()
-    }, [])
+    }, [filter])
 
     const getProductList = async () => {
         try {
-            const response = await apiClient.getProductList()
+            const response = await apiClient.getProductList(20, filter)
             setProducts(response)
         } catch (error) {
             console.error('Error fetching product list:', error)
@@ -37,7 +37,7 @@ export default function Products() {
             <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10">
                 <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between px-50">
                     {filters.map((filter) => (
-                        <Radio key={filter.id} value={filter} className="group">
+                        <Radio key={filter.id} value={filter.id} className="group">
                             <Button className="w-50 group-data-checked:font-bold group-data-checked:border-b-2 border-b-orange-500 hover:cursor-pointer h-full px-2">{filter.name}</Button>
                         </Radio>
                     ))}

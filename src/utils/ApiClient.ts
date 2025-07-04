@@ -65,11 +65,15 @@ class ApiClient {
         }
     }
 
-    public async getProductList(): Promise<Product[]> {
+    public async getProductList(count: number = 20, filter: string | null = null): Promise<Product[]> {
         try {
             const response = await axios.get(`${this.baseUrl}/products`, {
                 headers: {
                     Authorization: `Bearer ${this.getToken()}`
+                },
+                params: {
+                    count: count,
+                    filter: filter
                 }
             });
             return response.data.products;
