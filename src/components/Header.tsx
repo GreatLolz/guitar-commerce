@@ -1,12 +1,15 @@
 import { Button } from "@headlessui/react";
-import HeaderSearchBar from "./HeaderSearchBar";
+import HeaderSearchBar from "./header/HeaderSearchBar";
 import { ShoppingCart, User } from "lucide-react";
 import type { UserData } from "../types/UserData";
+import { NavLink } from "react-router";
 
-export default function Header({ onSignInClick, userData }: { onSignInClick: () => void, userData: UserData | null }) {
+export default function Header({ onSignInClick, setFilter, userData }: { onSignInClick: () => void, setFilter: (filter: string | null) => void, userData: UserData | null }) {
     return (
         <div className="flex flex-row bg-neutral-50 h-20 p-2 justify-between items-center px-55">
-            <img src="guitar.png" alt="guitar" className="w-24" />
+            <NavLink to="/" onClick={() => setFilter(null)}>
+                <img src="guitar.png" alt="guitar" className="w-24" />
+            </NavLink>
             <HeaderSearchBar />
             <div className="flex flex-row items-center gap-8 text-neutral-600">
                 {!userData ? (

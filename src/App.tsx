@@ -1,18 +1,33 @@
 import Header from "./components/Header";
-import SignInSidebar from "./components/SignInSidebar";
+import SignInSidebar from "./components/header/SignInSidebar";
 import { useEffect, useState } from 'react';
-import SignUpPopup from "./components/SignUpPopup";
+import SignUpPopup from "./components/header/SignUpPopup";
 import ApiClient from "./utils/api";
 import axios from "axios";
 import type { UserData } from "./types/UserData";
 import Products from "./pages/Products";
+import { Route, Routes, useNavigate } from "react-router";
+import Home from "./pages/Home";
+import { Button, Radio, RadioGroup } from "@headlessui/react";
 
 function App() {
+    const filters = [
+        { id: 'guitars', name: 'Guitars' },
+        { id: 'basses', name: 'Basses' },
+        { id: 'drums', name: 'Drums' },
+        { id: 'amps-effects', name: 'Amps & Effects' },
+        { id: 'keys-midi', name: 'Keys & MIDI' },
+        { id: 'recording', name: 'Recording' },
+        { id: 'accessories', name: 'Accessories' },
+    ]
+
+    const [filter, setFilter] = useState<string | null>(null)
+
     const apiClient = ApiClient.getInstance()
+    const navigate = useNavigate()
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [signUpOpen, setSignUpOpen] = useState(false)
-
     const [userData, setUserData] = useState<UserData | null>(null)
 
     useEffect(() => {
@@ -90,8 +105,23 @@ function App() {
                 onSignUp={signUp}
             />
             <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
-                <Header onSignInClick={toggleSidebar} userData={userData} />
-                <Products />
+                <Header onSignInClick={toggleSidebar} setFilter={setFilter} userData={userData} />
+                <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10">
+                    <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between px-50">
+                        {filters.map((filter) => (
+                            <Radio key={filter.id} value={filter.id} className="group">
+                                <Button 
+                                    className="w-50 group-data-checked:font-bold group-data-checked:border-b-2 border-b-orange-500 hover:cursor-pointer h-full px-2"
+                                    onClick={() => navigate(`/products`)}
+                                >{filter.name}</Button>
+                            </Radio>
+                        ))}
+                    </RadioGroup>
+                </div>
+                <Routes>
+                    <Route index element={<Home />} />
+                    <Route path="products" element={<Products filter={filter} />} />
+                </Routes>
             </div>
         </>
     )
