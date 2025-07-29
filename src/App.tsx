@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import SignInSidebar from "./components/SignInSidebar";
 import { useEffect, useState } from 'react';
 import SignUpPopup from "./components/SignUpPopup";
-import ApiClient from "./utils/ApiClient";
+import ApiClient from "./utils/api";
 import axios from "axios";
 import type { UserData } from "./types/UserData";
 import Products from "./pages/Products";

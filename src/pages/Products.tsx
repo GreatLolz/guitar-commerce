@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductTile from "../components/products/ProductTile";
 import type { Product } from "../types/product";
-import ApiClient from "../utils/ApiClient";
+import ApiClient from "../utils/api";
 import { Button, Radio, RadioGroup } from "@headlessui/react";
 
 export default function Products() {
