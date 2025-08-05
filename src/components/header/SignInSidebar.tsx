@@ -21,7 +21,7 @@ export default function SignInSidebar({ isOpen, onToggle, onSignIn, onToggleSign
     }
 
     return (
-        <div className="flex-row fixed right-0 top-0 bottom-0 max-w-md w-full bg-neutral-200 transition-all duration-300 ease-in-out transform"
+        <div className="flex-row fixed right-0 top-0 bottom-0 max-w-md w-full bg-neutral-200 transition-all duration-300 ease-in-out transform z-50"
              style={{ translate: isOpen ? '0' : '100%', opacity: isOpen ? 1 : 0 }}>
             <div className="flex flex-col text-white">
                 <div className="text-2xl font-bold mb-4 w-full bg-neutral-700 p-2 px-8 h-16 flex flex-row justify-between items-center">
