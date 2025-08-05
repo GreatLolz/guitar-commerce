@@ -106,12 +106,12 @@ function App() {
             />
             <div className="flex flex-col w-full h-screen bg-neutral-100 text-neutral-800">
                 <Header onSignInClick={toggleSidebar} setFilter={setFilter} userData={userData} />
-                <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10">
-                    <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between px-50">
+                <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10 hidden md:block">
+                    <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between md:px-20 xl:px-50">
                         {filters.map((filter) => (
                             <Radio key={filter.id} value={filter.id} className="group">
                                 <Button 
-                                    className="w-50 group-data-checked:font-bold group-data-checked:border-b-2 border-b-orange-500 hover:cursor-pointer h-full px-2"
+                                    className="xl:w-33 group-data-checked:font-bold group-data-checked:border-b-2 border-b-orange-500 hover:cursor-pointer h-full px-2"
                                     onClick={() => navigate(`/products`)}
                                 >{filter.name}</Button>
                             </Radio>

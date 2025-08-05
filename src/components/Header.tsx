@@ -6,12 +6,12 @@ import { NavLink } from "react-router";
 
 export default function Header({ onSignInClick, setFilter, userData }: { onSignInClick: () => void, setFilter: (filter: string | null) => void, userData: UserData | null }) {
     return (
-        <div className="flex flex-row bg-neutral-50 h-20 p-2 justify-between items-center px-55">
-            <NavLink to="/" onClick={() => setFilter(null)}>
-                <img src="guitar.png" alt="guitar" className="w-24" />
+        <div className="flex flex-row bg-neutral-50 h-20 p-2 justify-between items-center xl:px-55 md:px-20">
+            <NavLink to="/" onClick={() => setFilter(null)} className="w-full flex justify-center sm:w-auto sm:block">
+                <img src="guitar.png" alt="guitar" className="w-24 min-w-24" />
             </NavLink>
             <HeaderSearchBar />
-            <div className="flex flex-row items-center gap-8 text-neutral-600">
+            <div className="flex-row items-center gap-8 text-neutral-600 hidden sm:flex">
                 {!userData ? (
                     <>
                         <Button 
