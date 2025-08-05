@@ -82,6 +82,20 @@ class ApiClient {
             throw error;
         }
     }
+
+    public async getProduct(productId: string): Promise<Product> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/products/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            });
+            return response.data.product;
+        } catch (error) {
+            console.error('Error fetching product:', error);
+            throw error;
+        }
+    }
 }
 
 export default ApiClient;
