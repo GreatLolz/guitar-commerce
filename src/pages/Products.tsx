@@ -26,7 +26,7 @@ export default function Products({ filter }: { filter: string | null }) {
             
             <div className="grid grid-cols-4 gap-2 mx-auto py-10">
                 {products.map((product, index) => (
-                    <ProductTile key={index} imageUrl={product.imageUrl} name={product.name} price={product.price} rating={product.rating} reviewCount={product.reviewsCount}/>
+                    <ProductTile key={index} id={product.id} imageUrl={product.imageUrl} name={product.name} price={product.price} rating={product.rating} reviewCount={product.reviewsCount}/>
                 ))}
             </div>
         </div>

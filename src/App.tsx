@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import { Route, Routes, useNavigate } from "react-router";
 import Home from "./pages/Home";
 import { Button, Radio, RadioGroup } from "@headlessui/react";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
     const filters = [
@@ -121,6 +122,7 @@ function App() {
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="products" element={<Products filter={filter} />} />
+                    <Route path="products/:productId" element={<ProductDetails />}/>
                 </Routes>
             </div>
         </>
