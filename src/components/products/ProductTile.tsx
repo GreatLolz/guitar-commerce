@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { NavLink } from "react-router";
 import Rating from "./Rating";
 
@@ -6,7 +5,9 @@ export default function ProductTile({ id, imageUrl, name, price, rating, reviewC
     return (
         <div className="bg-neutral-50 p-10 flex flex-col items-center hover:shadow-md hover:cursor-pointer gap-2 w-70 h-100">
             <NavLink to={`/products/${id}`}>
-                <img src={imageUrl} alt={name} className="w-50 aspect-square" />
+                <div className="w-full h-50 overflow-hidden">
+                    <img src={imageUrl} alt={name} className="w-full h-full object-contain" />
+                </div>
                 <span className="w-full wrap-break-word line-clamp-2 leading-5 h-10">{name}</span>
                 <span className="w-full text-xl font-bold">${price}</span>
             </NavLink>
