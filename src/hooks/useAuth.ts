@@ -6,8 +6,6 @@ import axios from "axios";
 export function useAuth() {
     const apiClient = ApiClient.getInstance();
     const [userData, setUserData] = useState<UserData | null>(null)
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [signUpOpen, setSignUpOpen] = useState(false)
 
     useEffect(() => {
         getUserData()
@@ -32,15 +30,7 @@ export function useAuth() {
         }
     }
 
-    const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen)
-    }
-
-    const toggleSignUp = () => {
-        setSignUpOpen(!signUpOpen)
-    }
-
-    const handleSignIn = async (username: string, password: string) => {
+    const signIn = async (username: string, password: string) => {
         try {
             const response = await apiClient.signIn(username, password)
             
@@ -55,13 +45,12 @@ export function useAuth() {
         }
     }
 
-    const handleSignUp = async (username: string, password: string) => {
+    const signUp = async (username: string, password: string) => {
         try {
             const response = await apiClient.signUp(username, password)
             if (response.status === 200) {
-                await handleSignIn(username, password)
+                await signIn(username, password)
             }
-            setSignUpOpen(false)
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 alert(error.response?.data)
@@ -69,5 +58,5 @@ export function useAuth() {
         }
     }
 
-    return { userData, sidebarOpen, signUpOpen, toggleSidebar, toggleSignUp, handleSignIn, handleSignUp }
+    return { userData, signIn, signUp }
 }

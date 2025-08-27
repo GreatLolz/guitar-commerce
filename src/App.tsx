@@ -1,7 +1,5 @@
 import Header from "./components/Header";
-import SignInSidebar from "./components/header/SignInSidebar";
 import { useState } from 'react';
-import SignUpPopup from "./components/header/SignUpPopup";
 import Products from "./pages/Products";
 import { Route, Routes, useNavigate } from "react-router";
 import Home from "./pages/Home";
@@ -9,6 +7,7 @@ import { Button, Radio, RadioGroup } from "@headlessui/react";
 import ProductDetails from "./pages/ProductDetails";
 import { FILTERS } from "./types/product";
 import { useAuth } from "./hooks/useAuth";
+import { Sidebar } from "./components/sidebar/Sidebar";
 
 function App() {
     const [filter, setFilter] = useState<string | null>(null)
@@ -16,30 +15,14 @@ function App() {
     const navigate = useNavigate()
 
     const {
-        userData,
-        sidebarOpen,
-        signUpOpen,
-        toggleSidebar,
-        toggleSignUp,
-        handleSignIn,
-        handleSignUp
+        userData,   
     } = useAuth()
 
     return (
         <>
-            <SignInSidebar 
-                isOpen={sidebarOpen} 
-                onToggle={toggleSidebar}
-                onSignIn={handleSignIn}
-                onToggleSignUp={toggleSignUp}
-            />
-            <SignUpPopup 
-                isOpen={signUpOpen} 
-                onToggle={toggleSignUp}
-                onSignUp={handleSignUp}
-            />
+            <Sidebar />
             <div className="flex flex-col w-full h-full min-h-screen bg-neutral-100 text-neutral-800">
-                <Header onSignInClick={toggleSidebar} setFilter={setFilter} userData={userData} />
+                <Header setFilter={setFilter} userData={userData} />
                 <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10 hidden md:block">
                     <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between md:px-20 xl:px-50">
                         {FILTERS.map((filter) => (
