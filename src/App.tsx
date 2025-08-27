@@ -10,18 +10,9 @@ import { Route, Routes, useNavigate } from "react-router";
 import Home from "./pages/Home";
 import { Button, Radio, RadioGroup } from "@headlessui/react";
 import ProductDetails from "./pages/ProductDetails";
+import { FILTERS } from "./types/product";
 
 function App() {
-    const filters = [
-        { id: 'guitars', name: 'Guitars' },
-        { id: 'basses', name: 'Basses' },
-        { id: 'drums', name: 'Drums' },
-        { id: 'amps-effects', name: 'Amps & Effects' },
-        { id: 'keys-midi', name: 'Keys & MIDI' },
-        { id: 'recording', name: 'Recording' },
-        { id: 'accessories', name: 'Accessories' },
-    ]
-
     const [filter, setFilter] = useState<string | null>(null)
 
     const apiClient = ApiClient.getInstance()
@@ -109,7 +100,7 @@ function App() {
                 <Header onSignInClick={toggleSidebar} setFilter={setFilter} userData={userData} />
                 <div className="bg-neutral-50 border-t border-b border-neutral-200 h-10 hidden md:block">
                     <RadioGroup value={filter} onChange={setFilter} className="h-full flex justify-between md:px-20 xl:px-50">
-                        {filters.map((filter) => (
+                        {FILTERS.map((filter) => (
                             <Radio key={filter.id} value={filter.id} className="group">
                                 <Button
                                     className="xl:w-33 group-data-checked:font-bold group-data-checked:border-b-2 border-b-orange-500 hover:cursor-pointer h-full px-2"
