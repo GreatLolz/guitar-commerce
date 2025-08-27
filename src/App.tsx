@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SignUpPopup from "./components/header/SignUpPopup";
 import ApiClient from "./utils/api";
 import axios from "axios";
-import type { UserData } from "./types/UserData";
+import type { UserData } from "./types/user";
 import Products from "./pages/Products";
 import { Route, Routes, useNavigate } from "react-router";
 import Home from "./pages/Home";

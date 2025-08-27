@@ -1,7 +1,7 @@
 import { Button } from "@headlessui/react";
 import HeaderSearchBar from "./header/HeaderSearchBar";
 import { ShoppingCart, User } from "lucide-react";
-import type { UserData } from "../types/UserData";
+import type { UserData } from "../types/user";
 import { NavLink } from "react-router";
 
 export default function Header({ onSignInClick, setFilter, userData }: { onSignInClick: () => void, setFilter: (filter: string | null) => void, userData: UserData | null }) {
