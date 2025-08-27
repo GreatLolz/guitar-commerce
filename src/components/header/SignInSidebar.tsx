@@ -2,22 +2,18 @@ import { Button, Field, Input, Label } from '@headlessui/react'
 import { X } from 'lucide-react'
 import { useState } from 'react'
 
-export default function SignInSidebar({ isOpen, onToggle, onSignIn, onToggleSignUp: onSignUp }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void, onToggleSignUp: () => void }) {
+export default function SignInSidebar({ isOpen, onToggle, onSignIn, onToggleSignUp }: { isOpen: boolean, onToggle: () => void, onSignIn: (username: string, password: string) => void, onToggleSignUp: () => void }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    
-    const toggleSidebar = () => {
-        onToggle()
-    }
 
     const signIn = (username: string, password: string) => {
-        toggleSidebar()
+        onToggle()
         onSignIn(username, password)
     }
 
     const signUp = () => {
-        toggleSidebar()
-        onSignUp()
+        onToggle()
+        onToggleSignUp()
     }
 
     return (
@@ -26,7 +22,7 @@ export default function SignInSidebar({ isOpen, onToggle, onSignIn, onToggleSign
             <div className="flex flex-col text-white">
                 <div className="text-2xl font-bold mb-4 w-full bg-neutral-700 p-2 px-8 h-16 flex flex-row justify-between items-center">
                     Sign In
-                    <Button onClick={toggleSidebar} className="hover:cursor-pointer">
+                    <Button onClick={onToggle} className="hover:cursor-pointer">
                         <X size={32}/>
                     </Button>
                 </div>

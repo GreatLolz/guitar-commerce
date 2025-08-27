@@ -2,7 +2,7 @@ import { Description, Dialog, DialogBackdrop, DialogPanel, DialogTitle, Field, L
 import { X } from "lucide-react";
 import { useState } from "react";
 
-export default function SignUpPopup({ isOpen, setSignUpOpen, onSignUp }: { isOpen: boolean, setSignUpOpen: (open: boolean) => void, onSignUp: (username: string, password: string) => void }) {
+export default function SignUpPopup({ isOpen, onToggle, onSignUp }: { isOpen: boolean, onToggle: (open: boolean) => void, onSignUp: (username: string, password: string) => void }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -32,12 +32,12 @@ export default function SignUpPopup({ isOpen, setSignUpOpen, onSignUp }: { isOpe
     }
     
     return (
-        <Dialog open={isOpen} onClose={() => setSignUpOpen(false)} className="fixed inset-0 z-50 flex items-center justify-center">
+        <Dialog open={isOpen} onClose={() => onToggle(false)} className="fixed inset-0 z-50 flex items-center justify-center">
             <DialogBackdrop className="fixed inset-0 bg-neutral-900/50 z-40" />
             <DialogPanel className="w-full max-w-md bg-white rounded-lg shadow-lg z-50">
                 <DialogTitle className="flex flex-row items-center justify-between text-2xl font-bold mb-4 bg-orange-600 text-white w-full rounded-t-lg p-4">
                     <span>Sign Up</span>
-                    <Button className="hover:cursor-pointer" onClick={() => setSignUpOpen(false)}><X size={32}/></Button>
+                    <Button className="hover:cursor-pointer" onClick={() => onToggle(false)}><X size={32}/></Button>
                 </DialogTitle>
                 <div className="flex flex-col items-center gap-4 mt-2 w-full px-10 pb-10">
                     <Description>Create an account and become a member!</Description>
