@@ -1,30 +1,12 @@
 import { useParams } from "react-router"
-import type { Product } from "../types/product"
-import { useState } from "react"
-import { useEffect } from "react"
-import ApiClient from "../utils/api"
 import Rating from "../components/products/Rating"
 import { Button, Select } from "@headlessui/react"
 import { ShoppingBag } from "lucide-react"
+import { useProduct } from "../hooks/useProduct"
 
 export default function ProductDetails() {
     const { productId } = useParams()
-    const [product, setProduct] = useState<Product | null>(null)
-
-    const apiClient = ApiClient.getInstance()
-
-    useEffect(() => {
-        getProductDetails()
-    }, [productId])
-
-    const getProductDetails = async () => {
-        try {
-            const response = await apiClient.getProduct(productId!)
-            setProduct(response)
-        } catch (error) {
-            console.error('Error fetching product details:', error)
-        }
-    }
+    const { product } = useProduct(productId!)
 
     return (
         <div className="flex flex-col px-50 py-10">
