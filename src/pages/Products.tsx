@@ -12,17 +12,16 @@ export default function Products({ filter }: ProductsProps) {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
-        getProductList()
-    }, [filter])
-
-    const getProductList = async () => {
-        try {
-            const response = await apiClient.getProductList(20, filter)
-            setProducts(response)
-        } catch (error) {
-            console.error('Error fetching product list:', error)
+        const getProductList = async () => {
+            try {
+                const response = await apiClient.getProductList(20, filter)
+                setProducts(response)
+            } catch (error) {
+                console.error('Error fetching product list:', error)
+            }
         }
-    }
+        getProductList()
+    }, [filter, apiClient])
 
     return (
         <div className="flex flex-col">
