@@ -1,7 +1,16 @@
 import { NavLink } from "react-router";
 import Rating from "./Rating";
 
-export default function ProductTile({ id, imageUrl, name, price, rating, reviewCount }: { id: string, imageUrl: string, name: string, price: number, rating: number, reviewCount: number }) {
+interface ProductTileProps {
+    id: string
+    imageUrl: string
+    name: string
+    price: number
+    rating: number
+    reviewCount: number
+}
+
+export default function ProductTile({ id, imageUrl, name, price, rating, reviewCount }: ProductTileProps) {
     return (
         <div className="bg-neutral-50 p-10 flex flex-col items-center hover:shadow-md hover:cursor-pointer gap-2 w-70 h-100">
             <NavLink to={`/products/${id}`}>

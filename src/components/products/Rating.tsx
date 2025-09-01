@@ -1,6 +1,11 @@
 import { Star } from "lucide-react";
 
-export default function Rating({ rating, reviewCount }: { rating: number, reviewCount: number }) {
+interface RatingProps {
+    rating: number
+    reviewCount: number
+}
+
+export default function Rating({ rating, reviewCount }: RatingProps) {
     return (
         <div className="w-full flex relative">
             <div className="flex flex-row w-full">

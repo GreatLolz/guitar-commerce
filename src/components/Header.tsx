@@ -6,7 +6,12 @@ import { NavLink } from "react-router";
 import { useSidebar } from "../hooks/useSidebar";
 import { SignInForm } from "./sidebar/SignInForm";
 
-export default function Header({ setFilter, userData }: { setFilter: (filter: string | null) => void, userData: UserData | null }) {
+interface HeaderProps {
+    setFilter: (filter: string | null) => void
+    userData: UserData | null
+}
+
+export default function Header({ setFilter, userData }: HeaderProps) {
     const { openSidebar } = useSidebar()
 
     return (

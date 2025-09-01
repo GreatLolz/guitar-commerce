@@ -3,8 +3,11 @@ import ProductTile from "../components/products/ProductTile";
 import type { Product } from "../types/product";
 import ApiClient from "../utils/api";
 
-export default function Products({ filter }: { filter: string | null }) {
+interface ProductsProps {
+    filter: string | null
+}
 
+export default function Products({ filter }: ProductsProps) {
     const apiClient = ApiClient.getInstance()
     const [products, setProducts] = useState<Product[]>([])
 
