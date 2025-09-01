@@ -1,11 +1,14 @@
 import ApiClient from "../utils/api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { UserData } from "../types/user";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "./redux";
+import { setUserData } from "../reducers/auth";
 
 export function useAuth() {
     const apiClient = ApiClient.getInstance();
-    const [userData, setUserData] = useState<UserData | null>(null)
+    const userData = useAppSelector((state) => state.auth.userData)
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         getUserData()
@@ -19,7 +22,7 @@ export function useAuth() {
             }
     
             const user: UserData = { id: response.data.userId, name: response.data.username }
-            setUserData(user)
+            dispatch(setUserData(user))
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.status === 401) {
