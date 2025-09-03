@@ -7,16 +7,16 @@ import { useSidebar } from "../hooks/useSidebar";
 import { SignInForm } from "./sidebar/SignInForm";
 
 interface HeaderProps {
-    setFilter: (filter: string | null) => void
+    setCategory: (category: string | null) => void
     userData: UserData | null
 }
 
-export default function Header({ setFilter, userData }: HeaderProps) {
+export default function Header({ setCategory, userData }: HeaderProps) {
     const { openSidebar } = useSidebar()
 
     return (
         <div className="flex flex-row bg-neutral-50 h-20 p-2 justify-between items-center xl:px-55 md:px-20">
-            <NavLink to="/" onClick={() => setFilter(null)} className="w-full flex justify-center sm:w-auto sm:block">
+            <NavLink to="/" onClick={() => setCategory(null)} className="w-full flex justify-center sm:w-auto sm:block">
                 <img src="guitar.png" alt="guitar" className="w-24 min-w-24" />
             </NavLink>
             <HeaderSearchBar />

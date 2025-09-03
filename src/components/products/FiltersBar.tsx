@@ -18,7 +18,7 @@ export default function FiltersBar({ products }: FiltersBarProps) {
                     {brands.map((brand, index) => (
                         <span key={index} className="text-md flex flex-row items-center gap-2">
                             <Checkbox 
-                                checked={true} 
+                                checked={true}
                                 onChange={() => {}} 
                                 className="w-5 h-5 border-1 flex items-center justify-center rounded-sm"
                             >

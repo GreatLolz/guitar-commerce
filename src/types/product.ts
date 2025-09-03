@@ -11,7 +11,7 @@ export interface Product {
     reviewsCount: number
 }
 
-export const FILTERS = [
+export const CATEGORIES = [
     { id: 'guitars', name: 'Guitars' },
     { id: 'basses', name: 'Basses' },
     { id: 'drums', name: 'Drums' },

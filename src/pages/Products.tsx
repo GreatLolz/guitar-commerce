@@ -5,10 +5,10 @@ import ApiClient from "../utils/api";
 import FiltersBar from "../components/products/FiltersBar";
 
 interface ProductsProps {
-    filter: string | null
+    category: string | null
 }
 
-export default function Products({ filter }: ProductsProps) {
+export default function Products({ category: filter }: ProductsProps) {
     const apiClient = ApiClient.getInstance()
     const [products, setProducts] = useState<Product[]>([])
 

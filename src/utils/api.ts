@@ -65,7 +65,7 @@ class ApiClient {
         }
     }
 
-    public async getProductList(count: number = 20, filter: string | null = null): Promise<Product[]> {
+    public async getProductList(count: number = 20, category: string | null = null): Promise<Product[]> {
         try {
             const response = await axios.get(`${this.baseUrl}/products`, {
                 headers: {
@@ -73,7 +73,7 @@ class ApiClient {
                 },
                 params: {
                     count: count,
-                    filter: filter
+                    category: category
                 }
             });
             return response.data.products;
