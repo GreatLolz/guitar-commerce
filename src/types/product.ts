@@ -11,6 +11,12 @@ export interface Product {
     reviewsCount: number
 }
 
+export interface Filters {
+    brands: string[],
+    priceMin: number,
+    priceMax: number
+}
+
 export const CATEGORIES = [
     { id: 'guitars', name: 'Guitars' },
     { id: 'basses', name: 'Basses' },
