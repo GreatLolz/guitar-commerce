@@ -15,7 +15,7 @@ export default function Products({ category: filter }: ProductsProps) {
     const [filters, setFilters] = useState<Filters>({
         brands: [],
         priceMin: 0,
-        priceMax: 0
+        priceMax: 9999
     })
 
     useEffect(() => {
@@ -31,10 +31,21 @@ export default function Products({ category: filter }: ProductsProps) {
     }, [filter, apiClient])
 
     const isProductFiltered = (product: Product) => {
-        if (filters.brands.length > 0) {
-            return filters.brands.includes(product.brand)
+        const brandFiltered = () => {
+            if (filters.brands.length > 0) {
+                return filters.brands.includes(product.brand)
+            }
+            return true
         }
-        return true
+
+        const priceFiltered = () => {
+            if (filters.priceMin > 0 || filters.priceMax > 0) {
+                return product.price >= filters.priceMin && product.price <= filters.priceMax
+            }
+            return true
+        }
+
+        return brandFiltered() && priceFiltered()
     }
 
     return (

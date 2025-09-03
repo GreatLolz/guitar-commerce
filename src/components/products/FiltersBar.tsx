@@ -43,6 +43,23 @@ export default function FiltersBar({ filters, setFilters, products }: FiltersBar
                             {brand}
                         </span>
                     ))}
+                    <span className="text-md font-bold">Price range</span>
+                    <div className="flex flex-row items-center gap-2">
+                        <input 
+                            type="number" 
+                            value={filters.priceMin} 
+                            onChange={(e) => setFilters({ ...filters, priceMin: Number(e.target.value) })} 
+                            className="w-20 border-1 border-neutral-300 rounded-sm p-1" 
+                        />
+                        -
+                        <input 
+                            type="number" 
+                            value={filters.priceMax} 
+                            onChange={(e) => setFilters({ ...filters, priceMax: Number(e.target.value) })} 
+                            className="w-20 border-1 border-neutral-300 rounded-sm p-1" 
+                        />
+                        $
+                    </div>
                 </div>
             </div>
         </div>
