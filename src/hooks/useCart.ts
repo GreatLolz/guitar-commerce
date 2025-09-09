@@ -21,5 +21,31 @@ export function useCart() {
         }
     }
 
-    return { cart }
+    const addCartItem = async (productId: string, quantity: number) => {
+        try {
+            const response = await apiClient.addCartItem(productId, quantity)
+
+            if (response.status === 200) {
+                alert('Item added to cart.')
+                getActiveCart()
+            }
+        } catch (error) {
+            console.error('Error adding cart item:', error)
+        }
+    }
+
+    const removeCartItem = async (productId: string) => {
+        try {
+            const response = await apiClient.removeCartItem(productId)
+
+            if (response.status === 200) {
+                alert('Item removed from cart.')
+                getActiveCart()
+            }
+        } catch (error) {
+            console.error('Error removing cart item:', error)
+        }
+    }
+
+    return { cart, addCartItem, removeCartItem }
 }

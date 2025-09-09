@@ -134,6 +134,37 @@ class ApiClient {
             throw error;
         }
     }
+
+    public async addCartItem(productId: string, quantity: number): Promise<AxiosResponse> {
+        try {
+            const response = await axios.post(`${this.baseUrl}/cart`, {
+                productId,
+                quantity
+            }, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            })
+            return response;
+        } catch (error) {
+            console.error('Error adding cart item:', error);
+            throw error;
+        }
+    }
+
+    public async removeCartItem(productId: string): Promise<AxiosResponse> {
+        try {
+            const response = await axios.delete(`${this.baseUrl}/cart/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            })
+            return response;
+        } catch (error) {
+            console.error('Error removing cart item:', error);
+            throw error;
+        }
+    }
 }
 
 export default ApiClient;
