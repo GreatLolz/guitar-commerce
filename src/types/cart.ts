@@ -11,5 +11,5 @@ export interface CartItem {
 }
 
 export interface Cart {
-    products: CartItem[]
+    items: CartItem[]
 }

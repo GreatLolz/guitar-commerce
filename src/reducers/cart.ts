@@ -4,17 +4,17 @@ import type { Cart } from "../types/cart";
 export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        cart: { products: [] } as Cart
+        cart: { items: [] } as Cart
     },
     reducers: {
         setActiveCart: (state, action) => {
             state.cart = action.payload
         },
         addCartItem: (state, action) => {
-            state.cart.products.push(action.payload)
+            state.cart.items.push(action.payload)
         },
         removeCartItem: (state, action) => {
-            state.cart.products = state.cart.products.filter((item) => item.product.id !== action.payload)
+            state.cart.items = state.cart.items.filter((item) => item.product.id !== action.payload)
         }
     }
 })

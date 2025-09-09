@@ -125,7 +125,7 @@ class ApiClient {
             }
 
             const cart: Cart = {
-                products: cartItems
+                items: cartItems
             }
 
             return cart;
