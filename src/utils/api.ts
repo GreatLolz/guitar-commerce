@@ -1,5 +1,6 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { Product } from '../types/product';
+import type { Cart, CartItem, CartItemDTO } from '../types/cart';
 
 class ApiClient {
     private static instance: ApiClient;
@@ -19,6 +20,8 @@ class ApiClient {
         }
         return ApiClient.instance;
     }
+
+    // user
 
     public async signIn(username: string, password: string): Promise<AxiosResponse> {
         try {
@@ -65,6 +68,8 @@ class ApiClient {
         }
     }
 
+    // products
+
     public async getProductList(count: number = 20, category: string | null = null): Promise<Product[]> {
         try {
             const response = await axios.get(`${this.baseUrl}/products`, {
@@ -93,6 +98,39 @@ class ApiClient {
             return response.data.product;
         } catch (error) {
             console.error('Error fetching product:', error);
+            throw error;
+        }
+    }
+
+    // cart
+
+    public async getActiveCart(): Promise<Cart> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/cart`, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            });
+            
+            const items: CartItemDTO[] = response.data.cartItems;
+            const cartItems: CartItem[] = [];
+            
+            for (const item of items) {
+                const product = await this.getProduct(item.productId);
+                const cartProduct: CartItem = {
+                    product,
+                    quantity: item.quantity
+                };
+                cartItems.push(cartProduct);
+            }
+
+            const cart: Cart = {
+                products: cartItems
+            }
+
+            return cart;
+        } catch (error) {
+            console.error('Error fetching active cart:', error);
             throw error;
         }
     }
