@@ -5,6 +5,7 @@ import type { UserData } from "../types/user";
 import { NavLink } from "react-router";
 import { useSidebar } from "../hooks/useSidebar";
 import { SignInForm } from "./sidebar/SignInForm";
+import CartBar from "./sidebar/CartBar";
 
 interface HeaderProps {
     setCategory: (category: string | null) => void
@@ -29,7 +30,10 @@ export default function Header({ setCategory, userData }: HeaderProps) {
                         >
                             <User />Sign In
                         </Button>
-                        <Button className="hover:text-neutral-800 hover:cursor-pointer p-2 hover:bg-neutral-100">
+                        <Button 
+                            className="hover:text-neutral-800 hover:cursor-pointer p-2 hover:bg-neutral-100"
+                            onClick={() => openSidebar(<SignInForm/>, "Sign In")}
+                        >
                             <ShoppingCart />
                         </Button>
                     </>
@@ -41,7 +45,10 @@ export default function Header({ setCategory, userData }: HeaderProps) {
                         >
                             <User />{userData.name}
                         </Button>
-                        <Button className="hover:text-neutral-800 hover:cursor-pointer p-2 hover:bg-neutral-100">
+                        <Button 
+                            className="hover:text-neutral-800 hover:cursor-pointer p-2 hover:bg-neutral-100"
+                            onClick={() => openSidebar(<CartBar/>, "Cart")}
+                        >
                             <ShoppingCart />
                         </Button>
                     </>
