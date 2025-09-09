@@ -52,9 +52,9 @@ export default function Header({ setCategory, userData }: HeaderProps) {
                             onClick={() => openSidebar(<CartBar/>, "Cart")}
                         >
                             <ShoppingCart />
-                            <div className="absolute top-0 right-0 w-5 h-5 bg-orange-600 text-white text-sm rounded-full flex items-center justify-center">
+                            {cart.items.length > 0 && <div className="absolute top-0 right-0 w-5 h-5 bg-orange-600 text-white text-sm rounded-full flex items-center justify-center">
                                 {cart.items.length}
-                            </div>
+                            </div>}
                         </Button>
                     </>
                 )}
