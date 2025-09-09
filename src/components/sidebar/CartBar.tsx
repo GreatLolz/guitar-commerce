@@ -21,7 +21,7 @@ export default function CartBar() {
                         <img src={item.product.imageUrl} alt={item.product.name} className="w-25 h-25 object-contain"/>
                         <p className="font-semibold text-ellipsis line-clamp-2">{item.product.name}</p>
                     </NavLink>
-                    <Button onClick={() => removeCartItem(item.product.id)} className="bg-neutral-400 rounded-full p-0.5 hover:cursor-pointer hover:bg-orange-600">
+                    <Button onClick={() => removeCartItem(item.id)} className="bg-neutral-400 rounded-full p-0.5 hover:cursor-pointer hover:bg-orange-600">
                         <X size={10} className="text-white"/>
                     </Button>
                 </div>

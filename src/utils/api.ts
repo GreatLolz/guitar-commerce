@@ -118,6 +118,7 @@ class ApiClient {
             for (const item of items) {
                 const product = await this.getProduct(item.productId);
                 const cartProduct: CartItem = {
+                    id: item.cartItemId,
                     product,
                     quantity: item.quantity
                 };

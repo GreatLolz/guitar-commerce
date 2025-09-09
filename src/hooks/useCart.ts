@@ -34,9 +34,9 @@ export function useCart() {
         }
     }
 
-    const removeCartItem = async (productId: string) => {
+    const removeCartItem = async (id: string) => {
         try {
-            const response = await apiClient.removeCartItem(productId)
+            const response = await apiClient.removeCartItem(id)
 
             if (response.status === 200) {
                 alert('Item removed from cart.')
