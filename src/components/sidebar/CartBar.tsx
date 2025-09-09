@@ -5,23 +5,23 @@ import { X } from "lucide-react";
 import { NavLink } from "react-router";
 
 export default function CartBar() {
-    const { cart } = useCart()
+    const { cart, removeCartItem } = useCart()
     const { closeSidebar } = useSidebar()
 
     return (
-        <div className="p-5">
+        <div className="p-5 flex flex-col gap-2">
             {cart.items.map((item, index) => (
-                <div key={index} className="flex flex-row gap-2 items-center bg-white px-5 hover:shadow-md">
-                    <p>{item.quantity}</p>
+                <div key={index} className="flex flex-row gap-2 items-center justify-between bg-white px-5 p-3 hover:shadow-md">
                     <NavLink 
                         to={`/products/${item.product.id}`} 
-                        className="flex flex-row gap-2 items-center"
+                        className="flex flex-row gap-3 items-center"
                         onClick={() => closeSidebar()}
                     >
+                        <p className="w-full max-w-5">{item.quantity}</p>
                         <img src={item.product.imageUrl} alt={item.product.name} className="w-25 h-25 object-contain"/>
                         <p className="font-semibold text-ellipsis line-clamp-2">{item.product.name}</p>
                     </NavLink>
-                    <Button onClick={() => {}} className="bg-neutral-400 rounded-full p-0.5 hover:cursor-pointer hover:bg-orange-500">
+                    <Button onClick={() => removeCartItem(item.product.id)} className="bg-neutral-400 rounded-full p-0.5 hover:cursor-pointer hover:bg-orange-600">
                         <X size={10} className="text-white"/>
                     </Button>
                 </div>
