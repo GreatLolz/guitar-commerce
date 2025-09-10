@@ -1,10 +1,11 @@
 import { setActiveCart } from "../reducers/cart";
 import ApiClient from "../utils/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./redux";
 
 export function useCart() {
     const apiClient = ApiClient.getInstance();
+    const [loading, setLoading] = useState(false)
     const cart = useAppSelector((state) => state.cart.cart)
     const dispatch = useAppDispatch()
 
@@ -14,15 +15,19 @@ export function useCart() {
 
     const getActiveCart = async () => {
         try {
+            setLoading(true)
             const response = await apiClient.getActiveCart()
             dispatch(setActiveCart(response))
         } catch (error) {
             console.error('Error fetching active cart:', error)
+        } finally {
+            setLoading(false)
         }
     }
 
     const addCartItem = async (productId: string, quantity: number) => {
         try {
+            setLoading(true)
             const response = await apiClient.addCartItem(productId, quantity)
 
             if (response.status === 200) {
@@ -31,11 +36,14 @@ export function useCart() {
             }
         } catch (error) {
             console.error('Error adding cart item:', error)
+        } finally {
+            setLoading(false)
         }
     }
 
     const removeCartItem = async (id: string) => {
         try {
+            setLoading(true)
             const response = await apiClient.removeCartItem(id)
 
             if (response.status === 200) {
@@ -44,8 +52,10 @@ export function useCart() {
             }
         } catch (error) {
             console.error('Error removing cart item:', error)
+        } finally {
+            setLoading(false)
         }
     }
 
-    return { cart, addCartItem, removeCartItem }
+    return { cart, addCartItem, removeCartItem, loading }
 }

@@ -8,13 +8,15 @@ import { useState } from "react"
 
 export default function ProductDetails() {
     const { productId } = useParams()
-    const { product } = useProduct(productId!)
+    const { product, loading } = useProduct(productId!)
     const { addCartItem } = useCart()
     const [quantity, setQuantity] = useState(1)
 
     return (
         <div className="flex flex-col px-50 py-10">
-            {product ? (
+            {loading ? (
+                <p>Loading...</p>
+            ) : product ? (
                 <div className="flex flex-row gap-5">
 
                     <div className="w-full h-200 overflow-hidden bg-white">

@@ -4,9 +4,11 @@ import type { UserData } from "../types/user";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "./redux";
 import { setUserData } from "../reducers/auth";
+import { useState } from "react";
 
 export function useAuth() {
     const apiClient = ApiClient.getInstance();
+    const [loading, setLoading] = useState(false)
     const userData = useAppSelector((state) => state.auth.userData)
     const dispatch = useAppDispatch();
 
@@ -16,6 +18,7 @@ export function useAuth() {
 
     const getUserData = async () => {
         try {
+            setLoading(true)
             const response = await apiClient.getUserData()
             if (!response) {
                 return
@@ -30,11 +33,14 @@ export function useAuth() {
                     return
                 }
             }
+        } finally {
+            setLoading(false)
         }
     }
 
     const signIn = async (username: string, password: string) => {
         try {
+            setLoading(true)
             const response = await apiClient.signIn(username, password)
             
             if (response.status === 200) {
@@ -45,11 +51,14 @@ export function useAuth() {
             if (axios.isAxiosError(error)) {
                 alert(error.response?.data)
             }
+        } finally {
+            setLoading(false)
         }
     }
 
     const signUp = async (username: string, password: string) => {
         try {
+            setLoading(true)
             const response = await apiClient.signUp(username, password)
             if (response.status === 200) {
                 await signIn(username, password)
@@ -58,8 +67,10 @@ export function useAuth() {
             if (axios.isAxiosError(error)) {
                 alert(error.response?.data)
             }
+        } finally {
+            setLoading(false)
         }
     }
 
-    return { userData, signIn, signUp }
+    return { userData, signIn, signUp, loading }
 }

@@ -9,9 +9,10 @@ interface ProductsProps {
     category: string | null
 }
 
-export default function Products({ category: filter }: ProductsProps) {
+export default function Products({ category }: ProductsProps) {
     const apiClient = ApiClient.getInstance()
     const [products, setProducts] = useState<Product[]>([])
+    const [loading, setLoading] = useState(false)
     const [filters, setFilters] = useState<Filters>({
         brands: [],
         priceMin: 0,
@@ -21,14 +22,22 @@ export default function Products({ category: filter }: ProductsProps) {
     useEffect(() => {
         const getProductList = async () => {
             try {
-                const response = await apiClient.getProductList(20, filter)
+                setLoading(true)
+                const response = await apiClient.getProductList(20, category)
                 setProducts(response)
             } catch (error) {
                 console.error('Error fetching product list:', error)
+            } finally {
+                setLoading(false)
             }
         }
+        setFilters({
+            brands: [],
+            priceMin: 0,
+            priceMax: 9999
+        })
         getProductList()
-    }, [filter, apiClient])
+    }, [category, apiClient])
 
     const isProductFiltered = (product: Product) => {
         const brandFiltered = () => {
@@ -52,7 +61,9 @@ export default function Products({ category: filter }: ProductsProps) {
         <div className="flex flex-row px-50">
             <FiltersBar filters={filters} setFilters={setFilters} products={products}/>
             <div className="grid grid-cols-4 gap-2 mx-auto py-10">
-                {products.filter(isProductFiltered).map((product, index) => (
+                {loading ? (
+                    <p>Loading...</p>
+                ) : products.filter(isProductFiltered).map((product, index) => (
                     <ProductTile key={index} id={product.id} imageUrl={product.imageUrl} name={product.name} price={product.price} rating={product.rating} reviewCount={product.reviewsCount}/>
                 ))}
             </div>
