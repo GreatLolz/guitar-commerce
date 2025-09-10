@@ -29,7 +29,7 @@ export default function ProductDetails() {
                             <span>Brand: <span className="font-bold">{product.brand}</span></span>
                         </div>
                         <Rating rating={product.rating} reviewCount={product.reviewsCount}/>
-                        <span className="text-2xl font-bold">${product.price}</span>
+                        <span className="text-2xl font-bold">${product.price.toFixed(2)}</span>
                         <div className="flex flex-row gap-1 w-full">
                             <Select className="bg-neutral-100 px-2 rounded-sm hover:cursor-pointer font-bold border-1" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
                                 {Array.from({ length: Math.min(product.stock, 10) }, (_, index) => (
