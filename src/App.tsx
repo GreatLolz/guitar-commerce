@@ -8,6 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 import { CATEGORIES } from "./types/product";
 import { useAuth } from "./hooks/useAuth";
 import { Sidebar } from "./components/sidebar/Sidebar";
+import Cart from "./pages/Cart";
 
 function App() {
     const [category, setCategory] = useState<string | null>(null)
@@ -39,6 +40,7 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="products" element={<Products category={category} />} />
                     <Route path="products/:productId" element={<ProductDetails />}/>
+                    <Route path="cart" element={<Cart />} />
                 </Routes>
             </div>
         </>
