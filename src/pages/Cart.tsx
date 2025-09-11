@@ -21,7 +21,7 @@ export default function Cart() {
                                     <div className="flex flex-col items-start w-full max-w-20">
                                         <p className="font-semibold text-xl text-orange-600">${(item.product.price * item.quantity).toFixed(2)}</p>
                                         <p className="text-md">Qty. {item.quantity}</p>
-                                        <Button onClick={() => removeCartItem(item.id)} className="text-sm underline text-orange-600">Remove</Button>
+                                        <Button onClick={() => removeCartItem(item.id)} className="text-sm underline text-orange-600 cursor-pointer">Remove</Button>
                                     </div>
                                 </div>
                             </div>
