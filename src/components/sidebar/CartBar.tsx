@@ -9,11 +9,22 @@ export default function CartBar() {
     const { closeSidebar } = useSidebar()
 
     return (
-        <div className="p-5 flex flex-col gap-2">
-            <div className="flex flex-row gap-2 items-center">
-                <p className="text-xl">Total:</p>
-                <p className="text-xl font-bold">${cart.items.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2)}</p>
+        <div className="p-5 flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-5rem)]">
+            <div className="flex flex-row gap-2 items-end justify-between">
+                <div className="flex flex-row gap-2 items-center">
+                    <p className="text-xl">Total:</p>
+                    <p className="text-xl font-bold">${cart.items.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2)}</p>
+                </div>
+                <NavLink to="/cart" onClick={() => closeSidebar()} className="text-sm underline text-orange-600">View Cart</NavLink>
             </div>
+            {cart.items.length > 0 && (
+                <Button 
+                    onClick={() => closeSidebar()}
+                    className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer font-bold w-full"
+                >
+                    Checkout
+                </Button>
+            )}
             {cart.items.map((item, index) => (
                 <div key={index} className="flex flex-row gap-2 items-center justify-between bg-white px-5 p-3 hover:shadow-md">
                     <NavLink 
