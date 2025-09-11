@@ -11,8 +11,8 @@ export default function Cart() {
                 <hr className="my-3 border-neutral-300"/>
                 <div className="flex flex-col gap-2 w-full">
                     {cart.items.map((item, index) => (
-                        <>
-                            <div key={index} className="flex flex-row gap-5 items-center w-full">
+                        <div key={index}>
+                            <div className="flex flex-row gap-5 items-center w-full">
                                 <NavLink to={`/products/${item.product.id}`}>
                                     <img src={item.product.imageUrl} alt={item.product.name} className="w-40 h-40 object-contain"/>
                                 </NavLink>
@@ -26,7 +26,7 @@ export default function Cart() {
                                 </div>
                             </div>
                             <hr className="my-3 border-neutral-300"/>
-                        </>
+                        </div>
                     ))}
                 </div>
             </div>
