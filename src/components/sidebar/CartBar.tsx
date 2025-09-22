@@ -18,12 +18,13 @@ export default function CartBar() {
                 <NavLink to="/cart" onClick={() => closeSidebar()} className="text-sm underline text-orange-600">View Cart</NavLink>
             </div>
             {cart.items.length > 0 && (
-                <Button 
-                    onClick={() => closeSidebar()}
-                    className="bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer font-bold w-full"
+                <NavLink 
+                    to="/checkout" 
+                    onClick={() => closeSidebar()} 
+                    className="text-center bg-orange-600 hover:bg-orange-500 text-white p-2 px-4 rounded-sm hover:cursor-pointer font-bold w-full"
                 >
                     Checkout
-                </Button>
+                </NavLink>
             )}
             {cart.items.map((item, index) => (
                 <div key={index} className="flex flex-row gap-2 items-center justify-between bg-white px-5 p-3 hover:shadow-md">
