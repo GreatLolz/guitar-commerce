@@ -10,6 +10,7 @@ import { useAuth } from "./hooks/useAuth";
 import { Sidebar } from "./components/sidebar/Sidebar";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Delivery from "./components/checkout/Delivery";
 
 function App() {
     const [category, setCategory] = useState<string | null>(null)
@@ -43,7 +44,7 @@ function App() {
                     <Route path="products/:productId" element={<ProductDetails />}/>
                     <Route path="cart" element={<Cart />} />
                     <Route path="checkout" element={<Checkout />}>
-                        <Route index element={<h1>Shipping</h1>} />
+                        <Route index element={<Delivery />} />
                         <Route path="payment" element={<h1>Payment</h1>} />
                     </Route>
                 </Routes>
