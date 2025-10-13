@@ -11,6 +11,7 @@ import { Sidebar } from "./components/sidebar/Sidebar";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Delivery from "./components/checkout/Delivery";
+import Payment from "./components/checkout/Payment";
 
 function App() {
     const [category, setCategory] = useState<string | null>(null)
@@ -45,7 +46,7 @@ function App() {
                     <Route path="cart" element={<Cart />} />
                     <Route path="checkout" element={<Checkout />}>
                         <Route index element={<Delivery />} />
-                        <Route path="payment" element={<h1>Payment</h1>} />
+                        <Route path="payment" element={<Payment />} />
                     </Route>
                 </Routes>
             </div>
