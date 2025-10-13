@@ -5,14 +5,10 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: { items: [] } as Cart,
-        shippingCost: 0
     },
     reducers: {
         setActiveCart: (state, action) => {
             state.cart = action.payload
-        },
-        setShippingCost: (state, action) => {
-            state.shippingCost = action.payload
         },
         addCartItem: (state, action) => {
             state.cart.items.push(action.payload)
@@ -23,6 +19,6 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { setActiveCart, addCartItem, removeCartItem, setShippingCost } = cartSlice.actions
+export const { setActiveCart, addCartItem, removeCartItem } = cartSlice.actions
 
 export default cartSlice.reducer

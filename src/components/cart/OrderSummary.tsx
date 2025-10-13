@@ -4,10 +4,11 @@ import { NavLink } from "react-router";
 interface OrderSummaryProps {
     showButton?: boolean;
     showCart?: boolean;
+    shippingCost?: number;
 }
 
-export default function OrderSummary({ showButton = true, showCart = true }: OrderSummaryProps) {
-    const { cart, shippingCost } = useCart()
+export default function OrderSummary({ showButton = true, showCart = true, shippingCost = 0 }: OrderSummaryProps) {
+    const { cart } = useCart()
 
     return (
         <div className="w-full max-w-1/3 bg-white ml-10 border-1 border-neutral-300 p-5 h-fit">
@@ -20,12 +21,12 @@ export default function OrderSummary({ showButton = true, showCart = true }: Ord
                 </div>
                 <div className="flex flex-row justify-between">
                     <p className="text-lg">Shipping</p>
-                    <p className="text-lg font-bold">${shippingCost}</p>
+                    <p className="text-lg font-bold">${shippingCost.toFixed(2)}</p>
                 </div>
                 <hr className="my-3 border-neutral-300"/>
                 <div className="flex flex-row justify-between">
                     <p className="text-lg font-bold">Estimated Total</p>
-                    <p className="text-lg font-bold">${cart.items.reduce((total, item) => total + shippingCost + item.product.price * item.quantity, 0).toFixed(2) }</p>
+                    <p className="text-lg font-bold">${(cart.items.reduce((total, item) => total + item.product.price * item.quantity, 0) + shippingCost).toFixed(2)}</p>
                 </div>
                 {showCart && (
                     <div>

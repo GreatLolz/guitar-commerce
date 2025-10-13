@@ -1,12 +1,12 @@
 import { Radio, RadioGroup } from "@headlessui/react"
 import { useState } from "react"
 import { DELIVERY_METHODS, PAYMENT_METHODS, type PaymentMethod, type DeliveryMethod } from "../../types/checkout"
-import { useCart } from "../../hooks/useCart"
+import { useOutletContext } from "react-router"
 
 export default function Payment() {
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null)
     const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod | null>(null)
-    const { setShipping } = useCart()
+    const { setShippingCost } = useOutletContext<{shippingCost: number, setShippingCost: (cost: number) => void}>();
 
     const handlePaymentMethodChange = (method: PaymentMethod) => {
         setPaymentMethod(method)
@@ -15,7 +15,7 @@ export default function Payment() {
     const handleDeliveryMethodChange = (method: DeliveryMethod) => {
         console.log(method.price)
         setDeliveryMethod(method)
-        setShipping(method.price)
+        setShippingCost(method.price)
     }
 
     return (
