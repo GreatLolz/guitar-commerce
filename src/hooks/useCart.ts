@@ -1,4 +1,4 @@
-import { setActiveCart } from "../reducers/cart";
+import { setActiveCart, setShippingCost } from "../reducers/cart";
 import ApiClient from "../utils/api";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./redux";
@@ -7,6 +7,7 @@ export function useCart() {
     const apiClient = ApiClient.getInstance();
     const [loading, setLoading] = useState(false)
     const cart = useAppSelector((state) => state.cart.cart)
+    const shippingCost = useAppSelector((state) => state.cart.shippingCost)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -57,5 +58,9 @@ export function useCart() {
         }
     }
 
-    return { cart, addCartItem, removeCartItem, loading }
+    const setShipping = (cost: number) => {
+        dispatch(setShippingCost(cost))
+    }
+
+    return { cart, addCartItem, removeCartItem, loading, setShipping, shippingCost }
 }
