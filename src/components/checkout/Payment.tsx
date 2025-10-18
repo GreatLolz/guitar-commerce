@@ -4,8 +4,10 @@ import { DELIVERY_METHODS, PAYMENT_METHODS, type PaymentMethod, type DeliveryMet
 import { useOutletContext } from "react-router"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useCheckout } from "../../hooks/useCheckout"
+import { useNavigate } from "react-router"
 
 export default function Payment() {
+    const navigate = useNavigate()
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null)
     const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod | null>(null)
     const { setShippingCost } = useOutletContext<{shippingCost: number, setShippingCost: (cost: number) => void}>();
@@ -47,7 +49,7 @@ export default function Payment() {
         }
 
         if (paymentIntent.status === 'succeeded') {
-            alert('Payment successful!')
+            navigate('/payment-success')
         }
     }
 
