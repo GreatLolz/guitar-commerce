@@ -1,6 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { Product } from '../types/product';
 import type { Cart, CartItem, CartItemDTO } from '../types/cart';
+import type { CheckoutData } from '../types/checkout';
 
 class ApiClient {
     private static instance: ApiClient;
@@ -163,6 +164,23 @@ class ApiClient {
             return response;
         } catch (error) {
             console.error('Error removing cart item:', error);
+            throw error;
+        }
+    }
+
+    //orders
+
+    public async checkout(checkoutData: CheckoutData): Promise<string> {
+        try {
+            const response = await axios.post(`${this.baseUrl}/orders/checkout`, checkoutData, {
+                headers: {
+                    Authorization: `Bearer ${this.getToken()}`
+                }
+            })
+            
+            return response.data.clientSecret;
+        } catch (error) {
+            console.error('Error checking out:', error);
             throw error;
         }
     }
