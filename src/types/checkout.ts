@@ -1,5 +1,3 @@
-import paypal from "../assets/paypal.png"
-
 export interface CheckoutData {
     email: string,
     phone: string,
@@ -18,11 +16,6 @@ export interface PaymentMethod {
 }
 
 export const PAYMENT_METHODS: PaymentMethod[] = [
-    {
-        id: "paypal",
-        name: "PayPal",
-        icon: paypal
-    },
     {
         id: "credit-card",
         name: "Credit Card",
