@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  backend:
+    image: greatlolz/guitarcommerce-api:latest
+    container_name: backend
+    ports:
+      - "5180:5180"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=${DB_HOST};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=true
+      - JwtSettings__Issuer=${JWT_ISSUER}
+      - JwtSettings__Audience=${JWT_AUDIENCE}
+      - JwtSettings__Key=${JWT_KEY}
+      - StripeConfig__WebhookSecret=${STRIPE_WEBHOOK_SECRET}
+      - StripeConfig__SecretKey=${STRIPE_SECRET_KEY}
+      - SWAGGER_DOCS=${SWAGGER_DOCS}
+    depends_on:
+      - db
+    networks:
+      - guitar-commerce
+
+  frontend:
+    build: .
+    container_name: frontend
+    ports:
+      - "5181:5181"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_STRIPE_PUBLIC_KEY=${VITE_STRIPE_PUBLIC_KEY}
+    depends_on:
+      - backend
+    networks:
+      - guitar-commerce
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: db
+    environment:
+      SA_PASSWORD: "${DB_PASSWORD}"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - guitar-commerce
+
+networks:
+  guitar-commerce:
+    driver: bridge
