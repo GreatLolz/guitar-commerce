@@ -30,7 +30,7 @@ Built with React + Vite + TypeScript and Stripe for payments, alongside a .NET b
 ### Development
 
 1. Clone and run API in development mode: \
-For information about running the API in development mode, see [here](https://github.com/greatlolz/guitarcommerce-api).
+For information about running the API in development mode, see [here](https://github.com/greatlolz/guitar-commerce-api).
 
 2. Set environment variables:
     ```bash
